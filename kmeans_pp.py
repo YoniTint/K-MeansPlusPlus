@@ -1,6 +1,7 @@
 import argparse
 import pandas as pd
 import numpy as np
+import kmeanspp
 
 
 def k_means_pp(K, N, d, MAX_ITER, observations):
@@ -34,8 +35,8 @@ def k_means_pp(K, N, d, MAX_ITER, observations):
         centroids[j] = observations[chosen_centroid_index]
         centroids_indexes[j] = chosen_centroid_index
 
-    print(centroids)
     print(centroids_indexes)
+    kmeanspp.calc(N, d, observations.tolist(), centroids.tolist(), K, MAX_ITER)
 
 # Main
 parser = argparse.ArgumentParser()
