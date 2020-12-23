@@ -7,4 +7,4 @@ def build(c):
 
 @task
 def delete(c):
-    c.run('rm *mykmeanssp*.so')
+    c.run('rm *kmeanspp*.so')
