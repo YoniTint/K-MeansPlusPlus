@@ -81,11 +81,11 @@ static PyObject* calc(PyObject *self, PyObject *args)
 
     Py_ssize_t vectorSize;
 
-    int i = 0;
-    int j = 0;
-    int k = 0;
-    int d = 0;
-    int p = 0;
+    int i;
+    int j;
+    int k;
+    int d ;
+    int p ;
 
     int amountOfVectors;
 
@@ -95,6 +95,7 @@ static PyObject* calc(PyObject *self, PyObject *args)
     int centroidChanged = 0;
 
     //parse arguments
+
     if(!PyArg_ParseTuple(args, "iiOOii:calc", &vectorNum, &dimensions, &vectorList, &centroidsList, &clusterNum, &iterations))
     {
         return NULL;
@@ -147,7 +148,7 @@ static PyObject* calc(PyObject *self, PyObject *args)
 
 
 
-    for(i=0; i < vectorNum; i++)
+    for(i=0; i < clusterNum; i++)
     {
         centroids[i] = centroidPointer + i*dimensions;
     }
@@ -254,6 +255,8 @@ static PyObject* calc(PyObject *self, PyObject *args)
 
 
     printCentroids(dimensions, clusterNum, *centroids);
+
+
     //memory cleaning
     free(centroids);
     free(centroidPointer);

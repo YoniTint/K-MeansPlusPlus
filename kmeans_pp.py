@@ -9,24 +9,20 @@ def k_means_pp(K, N, d, MAX_ITER, observations):
 
     centroids = np.zeros(shape=(K, d), dtype=float)
     centroids_indexes = np.zeros(shape=K, dtype=int)
+    min_distances = np.zeros(shape=N, dtype=float)
 
     first_chosen_centroid_index = np.random.choice(N)
     centroids[0] = observations[first_chosen_centroid_index]
     centroids_indexes[0] = first_chosen_centroid_index
 
+    for i in range(0, N):
+        min_distances[i] = np.linalg.norm(observations[i] - centroids[0]) ** 2
+
     for j in range(1, K):
-        min_distances = np.zeros(shape=N, dtype=float)
-
         for i in range(0, N):
-            min_distance_squared = np.linalg.norm(observations[i] - centroids[0]) ** 2
-
-            for t in range(1, j):
-                curr_distance_squared = np.linalg.norm(observations[i] - centroids[t]) ** 2
-
-                if curr_distance_squared < min_distance_squared:
-                    min_distance_squared = curr_distance_squared
-
-            min_distances[i] = min_distance_squared
+            curr_distance_squared = np.linalg.norm(observations[i] - centroids[j - 1]) ** 2
+            if curr_distance_squared < min_distances[i]:
+                min_distances[i] = curr_distance_squared
 
         omega = np.sum(min_distances)
         prob_array = np.divide(min_distances, omega)
